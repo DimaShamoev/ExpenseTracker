@@ -6,6 +6,7 @@ import { PassportModule } from '@nestjs/passport/dist';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
     imports: [
@@ -17,10 +18,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
                 secret: configService.get('JWT_SECRET'),
                 signOptions: { expiresIn: '30d' }
             }),
-            inject: [ConfigService]
+            inject: [ConfigService],
         }),
     ],
     controllers: [AuthController],
-    providers: [AuthService, LocalStrategy],
+    providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
