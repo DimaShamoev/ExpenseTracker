@@ -33,7 +33,7 @@ const Header: React.FunctionComponent = () => {
 
             {
                 isAuth ? (
-                    <button className='btn btn-red cursor-pointer'>
+                    <button className='btn px-5 btn-red cursor-pointer roboto'>
                         <span>Log Out</span>
                         <FaSignOutAlt />
                     </button>
