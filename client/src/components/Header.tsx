@@ -1,11 +1,25 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router'
+import { Link, NavLink, useNavigate } from 'react-router'
 import { FaSignOutAlt } from 'react-icons/fa'
 import { SiBlockchaindotcom } from 'react-icons/si'
+import { useAuth } from '../hooks/useAuth'
+import { useAppDispatch } from '../store/hooks'
+import { logout } from '../store/user/userSlice'
+import { removeTokenFromLocaleStorage } from '../helpers/localstorage.helper'
+import { toast } from 'react-toastify'
 
 const Header: React.FunctionComponent = () => {
-    const isAuth = true
-    // const isAuth = false
+    const isAuth = useAuth()
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
+
+    const logoutHandler = () => {
+        dispatch(logout())
+        removeTokenFromLocaleStorage('token')
+        toast.success("You Logged Out")
+        navigate('/')
+    }
 
     return (
         <header className='flex items-center shadow-sm bg-slate-800 backdrop-blur-sm p-5'>
@@ -33,7 +47,10 @@ const Header: React.FunctionComponent = () => {
 
             {
                 isAuth ? (
-                    <button className='btn px-5 btn-red cursor-pointer roboto'>
+                    <button
+                        className='btn px-5 btn-red cursor-pointer roboto'
+                        onClick={logoutHandler}
+                    >
                         <span>Log Out</span>
                         <FaSignOutAlt />
                     </button>
