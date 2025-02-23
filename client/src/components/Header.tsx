@@ -13,7 +13,6 @@ const Header: React.FunctionComponent = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-
     const logoutHandler = () => {
         dispatch(logout())
         removeTokenFromLocaleStorage('token')
@@ -68,4 +67,4 @@ const Header: React.FunctionComponent = () => {
     )
 }
 
-export default Header
+export default Header;
