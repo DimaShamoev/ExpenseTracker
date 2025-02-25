@@ -30,13 +30,16 @@
 
 @layer utilities {
     .btn {
-        @apply flex items-center gap-2 text-white py-3 px-4 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400;
+        @apply flex items-center gap-2 text-white py-3 px-4 rounded-md;
     }
     .btn-red{
         @apply bg-rose-900 hover:bg-rose-800;
     }
     .btn-green{
         @apply bg-green-600 hover:bg-green-800;
+    }
+    .btn-red-hover{
+        @apply hover:bg-rose-700
     }
     .roboto{
         font-size: var(--roboto);
