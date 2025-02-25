@@ -1,9 +1,10 @@
 import React from 'react'
 import TransactionForm from '../components/TransactionForm'
 import { instance } from '../api/axios.api'
-import { ICategory } from '../Types/types'
+import { ICategory, IResponseTransactionLoader, ITransaction } from '../Types/types'
 import { toast } from 'react-toastify'
 import TransactionTable from '../components/TransactionTable'
+
 
 export const transactionAction = async ({request}: any) => {
     switch(request.method) {
@@ -21,22 +22,34 @@ export const transactionAction = async ({request}: any) => {
             return null
         }
         case "DELETE": {
-            
+            const formData = await request.formData()
+            const transactionId = formData.get('id')
+            await instance.delete(`/transactions/transaction/${transactionId}`)
+            toast.success("Transaction Deleted")
+            return null
         }
     }
 }
 
 export const transactionLoader = async () => {
     const categories = await instance.get<ICategory[]>('/categories')
+    const transactions = await instance.get<ITransaction[]>('/transactions')
+    const totalIncome = await instance.get<number>('/transactions/income/find/')
+    const totalExpense = await instance.get<number>('/transactions/expense/find/')
 
     const data = {
         categories: categories.data,
+        transactions: transactions.data,
+        totalIncome: totalIncome.data,
+        totalExpense: totalExpense.data
     }
 
     return data
 }
 
 const Transactions: React.FunctionComponent = () => {
+
+    const {} = useLoaderData() as IResponseTransactionLoader 
 
     return (
         <>
@@ -54,7 +67,7 @@ const Transactions: React.FunctionComponent = () => {
                                 Total Income
                             </p>
                             <p className="bg-green-600 p-1 rounded-sm text-center mt-2">
-                                1000$
+                                {}
                             </p>
                         </div>
                         <div>
@@ -75,7 +88,7 @@ const Transactions: React.FunctionComponent = () => {
             
             {/* Result Table */}
             <h1 className='mt-5'>Table</h1>
-            <TransactionTable />
+            <TransactionTable limit={5} />
 
         </>
     )
