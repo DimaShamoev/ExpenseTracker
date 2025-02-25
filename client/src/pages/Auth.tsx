@@ -72,7 +72,7 @@ const Auth: React.FunctionComponent = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <button className="btn btn-green mx-auto cursor-pointer">Submit</button>
+                <button className="btn btn-green mx-auto cursor-pointer w-full flex items-center justify-center">Submit</button>
             </form>
 
             <div className="flex justify-center mt-5">
