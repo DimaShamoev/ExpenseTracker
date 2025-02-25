@@ -4,6 +4,9 @@ import { instance } from '../api/axios.api'
 import { ICategory, IResponseTransactionLoader, ITransaction } from '../Types/types'
 import { toast } from 'react-toastify'
 import TransactionTable from '../components/TransactionTable'
+import { CurrencyFormat } from '../helpers/currency.helper'
+import { useLoaderData } from 'react-router-dom'
+import Chart from '../components/Chart'
 
 
 export const transactionAction = async ({request}: any) => {
@@ -49,7 +52,7 @@ export const transactionLoader = async () => {
 
 const Transactions: React.FunctionComponent = () => {
 
-    const {} = useLoaderData() as IResponseTransactionLoader 
+    const { totalIncome, totalExpense } = useLoaderData() as IResponseTransactionLoader 
 
     return (
         <>
@@ -67,7 +70,7 @@ const Transactions: React.FunctionComponent = () => {
                                 Total Income
                             </p>
                             <p className="bg-green-600 p-1 rounded-sm text-center mt-2">
-                                {}
+                                {CurrencyFormat.format(totalIncome)}
                             </p>
                         </div>
                         <div>
@@ -75,13 +78,13 @@ const Transactions: React.FunctionComponent = () => {
                                 Total Expense
                             </p>
                             <p className="bg-red-500 p-1 rounded-sm text-center mt-2">
-                                1000$
+                            {CurrencyFormat.format(totalExpense)}
                             </p>
                         </div>
                     </div>
 
                     <>
-                        Chart
+                        <Chart totalExpense={totalExpense} totalIncome={totalIncome} />
                     </>
                 </div>
             </div>
