@@ -33,7 +33,5 @@ export class AuthorGuard implements CanActivate {
         } 
         
         return false
-
-        // return (entity && user && entity.user.id === user.id) ? true : false;
     }
 }
