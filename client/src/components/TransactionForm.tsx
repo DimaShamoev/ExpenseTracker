@@ -86,7 +86,7 @@ const TransactionForm: React.FunctionComponent = () => {
                 <div
                 >
                     <button
-                        type="submit" // Add this line to make it a submit button
+                        type="submit"
                         className="btn btn-green flex text-center items-center justify-center cursor-pointer"
                     >
                         Submit
