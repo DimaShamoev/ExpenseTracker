@@ -12,7 +12,7 @@ Expense Tracker is a full-stack web application built using React TypeScript for
 - **Backend**
     - NestJS
     - JWT authentication
-    - Postgres
+    - TypeOrm
 - **Database**
     - PostgreSQL
 
